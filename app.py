@@ -23,9 +23,9 @@ Session(app)
 # MongoDB Configuration
 atlas_uri = os.getenv('MONGO_URI') # Check if MONGO_URI is set in .env
 if atlas_uri:
-     # If MONGO_ATLAS_URI is set, use it
-     app.config['MONGO_URI'] = atlas_uri
-     print("Using Atlas URI:", atlas_uri)
+    # If MONGO_ATLAS_URI is set, use it
+    app.config['MONGO_URI'] = atlas_uri
+    print("Using Atlas URI:", atlas_uri)
 else: #try to use local mongodb
     app.config['MONGO_URI'] = f"mongodb://{os.getenv('MONGO_HOST', 'localhost')}:{os.getenv('MONGO_PORT', '27017')}/{os.getenv('MONGO_DB', 'project2')}"
 
@@ -132,14 +132,17 @@ def dashboard():
     # Fetch all products
     products = list(mongo.db.products.find())
 
+    # Get all unique tags for the filter dropdown
+    current_tags = mongo.db.products.distinct("tag")
+
     # Fetch comments for each product and attach them
     for product in products:
         product["_id"] = str(product["_id"])  # Convert ObjectId to string for Jinja compatibility
         product["comments"] = list(mongo.db.comments.find({"product_id": product["_id"]}))
 
-    return render_template('dashboard.html', current_user=current_user, products=products)
+    return render_template('dashboard.html', current_user=current_user, products=products,tags=current_tags)
 
-    return render_template('dashboard.html', current_user=None, products=[])
+    # return render_template('dashboard.html', current_user=None, products=[])
 
 
 # Logout Route
@@ -148,7 +151,7 @@ def dashboard():
 def logout():
     logout_user()
     flash('You have been logged out.', 'info')
-    return redirect(url_for('login'))
+    return redirect(url_for('dashboard')) # Since unauthorized users can view products now, redirect to dashboard
 
 #profile route
 @app.route('/profile', methods=['GET', 'POST'])
@@ -259,6 +262,48 @@ def product_detail(product_id):
             return redirect(url_for("product_detail", product_id=product_id))
 
     return render_template("product_detail.html", product=product, comments=comments)
+
+@app.route("/search")
+def search_product():
+    search_query = request.args.get('q', '')
+    selected_tag = request.args.get('tag', '')
+    
+    # Build the search query for MongoDB
+    search_filter = {}
+    
+    if search_query:
+        # Search in both product name and description (case-insensitive)
+        search_filter['$or'] = [
+            {"product_name": {"$regex": search_query, "$options": "i"}},
+            {"description": {"$regex": search_query, "$options": "i"}}
+        ]
+    
+    if selected_tag:
+        # Filter by the selected tag
+        search_filter["tag"] = selected_tag
+    
+    # If no filters are applied, show all products
+    if search_filter:
+        products = list(mongo.db.products.find(search_filter))
+    else:
+        products = list(mongo.db.products.find())
+    
+    # Get all unique tags for the filter dropdown
+    all_tags = mongo.db.products.distinct("tag")
+    
+    # Convert ObjectId to string for each product
+    for product in products:
+        product["_id"] = str(product["_id"])
+        product["comments"] = list(mongo.db.comments.find({"product_id": product["_id"]}))
+    
+    return render_template('dashboard.html', 
+                          current_user=current_user, 
+                          products=products, 
+                          search_query=search_query,
+                          selected_tag=selected_tag,
+                          all_tags=all_tags)
+    
+
 # Run the Flask App
 if __name__ == '__main__':
     app.run(debug=True)

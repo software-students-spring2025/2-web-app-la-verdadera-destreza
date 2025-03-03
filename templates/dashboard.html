@@ -13,6 +13,52 @@
 
     <hr>
 
+    <!-- Search and Filter Section -->
+    <div>
+        <!-- Search Form -->
+        <form action="{{ url_for('search_product') }}" method="GET" style="margin: 10px 0; max-width: 100%;">
+            <div style="display: flex; width: 75%;">
+                <input type="text" name="q" placeholder="Search by product name or description"
+                       value="{{ search_query if search_query is defined else '' }}"
+                       style="flex: 1; min-width: 200px; max-width: 100%; padding: 5px; box-sizing: border-box;">
+                <button type="submit" style="padding: 5px 15px; white-space: nowrap;">Search</button>
+            </div>
+        </form>
+    
+        <!-- Active Filters -->
+        {% if (search_query is defined and search_query) or (selected_tag is defined and selected_tag) %}
+            <div>
+                <strong>Active filters:</strong>
+                {% if search_query is defined and search_query %}
+                    <span>Search: "{{ search_query }}"</span>
+                {% endif %}
+                {% if selected_tag is defined and selected_tag %}
+                    <span>Category: {{ selected_tag }}</span>
+                {% endif %}
+                <a href="{{ url_for('dashboard') }}">[Clear all]</a>
+            </div>
+        {% endif %}
+    
+        <!-- Category Filter -->
+        <div>
+            <strong>Filter by category:</strong>
+            <a href="{{ url_for('dashboard') }}" 
+               {% if not selected_tag is defined or not selected_tag %}style="font-weight: bold;"{% endif %}>
+                All
+            </a>
+            {% if all_tags %}
+                {% for tag in all_tags %}
+                    {% if tag %}  <!-- Skip empty tags -->
+                    | <a href="{{ url_for('search_product', tag=tag, q=search_query if search_query is defined else '') }}" 
+                         {% if selected_tag is defined and selected_tag == tag %}style="font-weight: bold;"{% endif %}>
+                        {{ tag }}
+                    </a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
     <h3>Posted Products</h3>
     {% if products %}
     <table class="table table-bordered">
