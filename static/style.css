@@ -9,17 +9,3 @@
 .navbar-dark .navbar-brand {
     color: white !important; /* Ensure brand text remains visible */
 }
-
-/* Search Button Styling */
-button[type="submit"] {
-    background-color: #57068c !important; /* Set the button color to violet */
-    color: white !important; /* Set text color to white */
-    border: none; /* Remove default border */
-    padding: 5px 15px; /* Adjust padding */
-    cursor: pointer; /* Change cursor to pointer */
-    font-weight: bold; /* Make text bold */
-}
-
-button[type="submit"]:hover {
-    background-color: #6b0fa3 !important; /* Slightly lighter violet on hover */
-}
