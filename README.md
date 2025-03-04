@@ -21,18 +21,18 @@ A little exercise to build a web application following an agile development proc
 
 ## Steps necessary to run the software
 
-## Prerequisites
+### Prerequisites
 - Python 3.11 or higher
 - Docker Desktop installed
 
-## Clone the repository
+### Clone the repository
 Clone the repository by this command line:
 
 ```sh
 git clone https://github.com/software-students-spring2025/2-web-app-segfaultsquad.git <your_dirname>
 ```
 
-## Download all requirements
+### Download all requirements
 1. create a virtual environment in the project file
 ```sh
 python -m venv venv
@@ -46,20 +46,22 @@ source venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-## Set up the .env file
+### Set up the .env file
 1. create a .env file which include some configuration which helps you to connect with mongoDB data base.
 
 ```ini
 # Secret Key
-SECRET_KEY=myverysecretkey
+    SECRET_KEY=yourSecretKey
 
-# MongoDB Configuration (No authentication)
-MONGO_DB=project2
-MONGO_HOST=localhost
-MONGO_PORT=27017
+# If using local mongodb MongoDB (assume no authentication set up for your local mongodb)
+MONGO_DB= your database name(on local now)
+MONGO_HOST=your localhost
+MONGO_PORT= your port for MongoDB (default: 27017)
+#If using Atlas
+MONGO_URI=mongodb+srv://your_username:your_password@cluster0.m3eme.mongodb.net/project2?retryWrites=true&w=majority&appName=Cluster0
 ```
 
-## Set up Docker
+### Set up Docker
 1. Build and start the containers using Docker Compose:
 
 ```sh
@@ -70,7 +72,7 @@ docker run -d -p 27017:27017 --name=mongo-example mongo:latest
 docker exec -it mongo-example mongosh
 ```
 
-## Use the application
+### Use the application
 After running this command, MongoDB will be running in a Docker container, accessible on localhost:27017, and it will be running on http://127.0.0.1:5000
 
 

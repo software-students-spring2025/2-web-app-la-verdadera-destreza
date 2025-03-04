@@ -12,13 +12,13 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('home') }}">Violet Bay</a>
-            <div class="navbar-nav">
+            <div class="navbar-nav" style="display: flex; flex-direction: row;">
                 {% if current_user.is_authenticated %}
-                    <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
-                    <a class="nav-link" href="{{ url_for('profile') }}">Profile</a> <!-- Added Profile button -->
+                    <a class="nav-link" style="margin-right: 15px;" href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <a class="nav-link" style="margin-right: 15px;" href="{{ url_for('profile') }}">Profile</a>
                     <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
                 {% else %}
-                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    <a class="nav-link" style="margin-right: 15px;" href="{{ url_for('login') }}">Login</a>
                     <a class="nav-link" href="{{ url_for('register') }}">Register</a>
                 {% endif %}
             </div>
