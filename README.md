@@ -46,6 +46,18 @@ source venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
+## Set up Docker
+1. Build and start the containers using Docker Compose:
+
+```sh
+docker run -d -p 27017:27017 --name=mongo-example mongo:latest
+```
+
+## connect to mongoDB database
+```sh
+docker exec -it mongo-example mongosh
+```
+
 
 ## Task boards
 
