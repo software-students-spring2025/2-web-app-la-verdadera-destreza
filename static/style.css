@@ -21,5 +21,29 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #6b0fa3 !important; /* Slightly lighter violet on hover */
+    background-color: #6b0fa3 !important; 
+}
+
+/* Ensure the page takes up the full height of the viewport */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make sure the content grows while pushing the footer down */
+.container {
+    flex: 1;
+}
+
+/* Fixed Footer at the Bottom */
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #57068c !important;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
 }
