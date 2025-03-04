@@ -21,7 +21,59 @@ A little exercise to build a web application following an agile development proc
 
 ## Steps necessary to run the software
 
-See instructions. Delete this line and place instructions to download, configure, and run the software here.
+## Prerequisites
+- Python 3.11 or higher
+- Docker Desktop installed
+
+## Clone the repository
+Clone the repository by this command line:
+
+```sh
+git clone https://github.com/software-students-spring2025/2-web-app-segfaultsquad.git <your_dirname>
+```
+
+## Download all requirements
+1. create a virtual environment in the project file
+```sh
+python -m venv venv
+```
+2. activate the virtual environment
+```sh
+source venv/Scripts/activate
+```
+3. install requirements in the virtual environments
+```sh
+pip install -r requirements.txt
+```
+
+## Set up the .env file
+1. create a .env file which include some configuration which helps you to connect with mongoDB data base.
+
+```ini
+# Secret Key
+SECRET_KEY=myverysecretkey
+
+# MongoDB Configuration (No authentication)
+MONGO_DB=project2
+MONGO_HOST=localhost
+MONGO_PORT=27017
+```
+
+## Set up Docker
+1. Build and start the containers using Docker Compose:
+
+```sh
+docker run -d -p 27017:27017 --name=mongo-example mongo:latest
+```
+2. Connect to database
+```sh
+docker exec -it mongo-example mongosh
+```
+
+## Use the application
+After running this command, MongoDB will be running in a Docker container, accessible on localhost:27017, and it will be running on http://127.0.0.1:5000
+
+
 
 ## Task boards
 
