@@ -169,7 +169,7 @@ def profile():
         product_image = request.files.get('product_image')
         description = request.form.get('description')
         price = request.form.get('price')
-        delivery_location = request.form.get('delivery_location')
+        pickup_location = request.form.get('pickup_location')
         inventory = request.form.get('inventory')
         tag = request.form.get('tag')
 
@@ -187,7 +187,7 @@ def profile():
             "product_name": product_name,
             "description": description,
             "price": price,
-            "delivery_location": delivery_location,
+            "pickup_location": pickup_location,
             "inventory": inventory,
             "tag": tag,
             "image_data": image_data,   # Base64 encoded image data
