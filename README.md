@@ -46,7 +46,7 @@ source venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-## Set up the virtual environment
+## Set up the .env file
 1. create a .env file which include some configuration which helps you to connect with mongoDB data base.
 
 ```ini
@@ -65,11 +65,13 @@ MONGO_PORT=27017
 ```sh
 docker run -d -p 27017:27017 --name=mongo-example mongo:latest
 ```
-
-## connect to mongoDB database
+2. Connect to database
 ```sh
 docker exec -it mongo-example mongosh
 ```
+
+## Use the application
+After running this command, MongoDB will be running in a Docker container, accessible on localhost:27017, and it will be running on http://127.0.0.1:5000
 
 
 
