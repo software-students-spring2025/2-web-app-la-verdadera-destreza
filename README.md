@@ -72,7 +72,7 @@ docker run -d -p 27017:27017 --name=mongo-example mongo:latest
 docker exec -it mongo-example mongosh
 ```
 
-### Use the application
+### Run the application
 After running this command, MongoDB will be running in a Docker container, accessible on localhost:27017, and it will be running on http://127.0.0.1:5000
 
 
