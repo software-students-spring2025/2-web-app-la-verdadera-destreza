@@ -32,6 +32,20 @@ Clone the repository by this command line:
 git clone https://github.com/software-students-spring2025/2-web-app-segfaultsquad.git <your_dirname>
 ```
 
+## Download all requirements
+1. create a virtual environment in the project file
+```sh
+python -m venv venv
+```
+2. activate the virtual environment
+```sh
+source venv/Scripts/activate
+```
+3. install requirements in the virtual environments
+```sh
+pip install -r requirements.txt
+```
+
 
 ## Task boards
 
