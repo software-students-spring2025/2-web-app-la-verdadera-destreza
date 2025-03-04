@@ -1,0 +1,11 @@
+.navbar {
+    background-color: violet !important; /* Change navbar background to violet */
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white !important; /* Change text color to white */
+}
+
+.navbar-dark .navbar-brand {
+    color: white !important; /* Change brand text color to white */
+}
