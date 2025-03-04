@@ -1,11 +1,11 @@
 .navbar {
-    background-color: violet !important; /* Change navbar background to violet */
+    background-color: #57068c !important; /* Set navbar background to your violet color */
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: white !important; /* Change text color to white */
+    color: white !important; /* Ensure navbar links remain visible */
 }
 
 .navbar-dark .navbar-brand {
-    color: white !important; /* Change brand text color to white */
+    color: white !important; /* Ensure brand text remains visible */
 }
